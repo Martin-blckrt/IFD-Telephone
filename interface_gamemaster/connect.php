@@ -19,12 +19,11 @@ session_start();
 	$erreur = 1;
 	if(!empty($_POST)){
 		if(empty($_POST['identifiant'])){
-			echo "<p>Vous n'avez pas saisi votre identifiant</p>";
+			echo "<p class=\"erreur\">Vous n'avez pas saisi votre identifiant</p>";
 		}
 		if(empty($_POST['mdp'])){
-			echo "<p>Vous n'avez pas saisi votre mot de passe</p>";
+			echo "<p class=\"erreur\">Vous n'avez pas saisi votre mot de passe</p>";
 		}
-		echo "<form action=\"index.php\"><button type=\"submit\" >Retour</button></form>";
 	}
 	if(!empty($_POST['identifiant']) AND !empty($_POST['mdp'])){
 		include("connexion_bdd.php");
@@ -32,9 +31,9 @@ session_start();
 		$requete->execute(array(htmlspecialchars($_POST['identifiant'])));
 		$result = $requete->fetch();
 		if(empty($result)){
-			echo "<p>Désolé, la combinaison pseudo/mot de passe ne correspond à aucun game master.</p>";
+			echo "<p class=\"erreur\">Désolé, la combinaison identifiant/mot de passe ne correspond à aucun Game-Master.</p>";
 		} elseif(!password_verify($_POST['mdp'], $result['hash_mdp'])){
-			echo "<p>Désolé, la combinaison pseudo/mot de passe ne correspond à aucun game master.</p>";
+			echo "<p class=\"erreur\">Désolé, la combinaison identifiant/mot de passe ne correspond à aucun Game-Master.</p>";
 		}
 		else{
 			$erreur = 0;
@@ -44,6 +43,9 @@ session_start();
 			$_SESSION['connected_gm_identifiant'] = $_POST['identifiant'];
 			header("Location: menu_partie.php");
 		}
+	}
+	if($erreur){
+		echo "<form action=\"index.php\"><button type=\"submit\" >Retour</button></form>";
 	}
 include 'footer.php';
 ?>

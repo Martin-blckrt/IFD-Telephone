@@ -15,11 +15,12 @@ include("connexion_bdd.php");
 		$new_duree = gmdate("H:i:s",time() - $date_deb);
 		echo " Maintenant : ".time();
 		//$new_duree = date_diff(time(),$date_deb);
-		$requete = $bdd->prepare('UPDATE details_parties SET duree_resolution = :dur WHERE ID_enigme = :no_en; UPDATE details_parties SET etat = :nouvel_etat WHERE ID_enigme = :no_en');
+		$requete = $bdd->prepare('UPDATE details_parties SET duree_resolution = :dur WHERE ID_enigme = :no_en AND ID_partie = :no_pa; UPDATE details_parties SET etat = :nouvel_etat WHERE ID_enigme = :no_en AND ID_partie = :no_pa');
 		$requete->execute(array(
 			'temps_deb' => $date_deb,
 			'nouvel_etat' => $new_state,
 			'no_en' => $_POST['id_enigme'],
+			'no_pa' => $_SESSION['partie_ouverte'],
 			'dur' => $new_duree
 		));
 

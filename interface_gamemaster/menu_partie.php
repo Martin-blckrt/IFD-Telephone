@@ -20,7 +20,7 @@
 	include 'header.php';
 	?>
 	<h1>Menu principal</h1>
-	<p class="temoin_connexion"><u><b>Game Master connecté :</b></u>
+	<p class="temoin_connexion"><u><b>Game-Master connecté :</b></u>
 		<?php
 			echo " ".$_SESSION['connected_gm_prenom'] . " " . $_SESSION['connected_gm_nom'];
 		?>
@@ -47,7 +47,7 @@
 	</form>
 	<br>
 	<form action="suppr_gm.php">
-		<button>Supprimer un compte de Game Master</button>
+		<button>Supprimer mon compte de Game Master</button>
 	</form>
 <?php
 include "footer.php";
