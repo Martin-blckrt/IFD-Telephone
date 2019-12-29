@@ -20,14 +20,14 @@
 			<label><u>Selectionnez le nom de l'énigme à supprimer :</u>&nbsp
 				<select name="rep">
 				<?php
-				$requete = $bdd->prepare('SELECT nom FROM enigmes ORDER BY ordre_apparition');
+				$requete = $bdd->prepare('SELECT nom, ID FROM enigmes ORDER BY ordre_apparition');
 				$requete->execute();
 				while($donnees=$requete->fetch()){
 				?>
 					<option> <?php echo $donnees['nom']; ?></option>
 				<?php
-			}
-			?>
+				}
+				?>
 				</select>
 			</label><br><br>
 			<button type="submit"><font color="red">Supprimer l'énigme</font></button>
@@ -37,6 +37,9 @@
 	<form action="config_room.php">
 		<button><b>Retour</b></button>
 	</form>
+	<?php
+	include "footer.php";
+	?>
 </center>
 
 </body>

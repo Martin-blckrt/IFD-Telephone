@@ -43,7 +43,7 @@ include("connexion_bdd.php");
 						<tr>
 							<td><?php echo $ligne['ordre']; ?></td>
 							<td><?php echo $ligne['nom_enigme']; ?></td>
-							<?php echo "<td class=\"_". $ligne['state'] ."\">";
+							<?php echo "<td class=\"_". $ligne['state'] ."\"><font color=\"black\"><b>";
 							$correspondance_etats=array("Non-résolue","Indice 1 délivré","Indice 2 délivré", "Résolue avec 1 indice", "Résolue avec 2 indices", "Résolue en autonomie");
 							if($ligne['state']<3){
 								echo $correspondance_etats[$ligne['state']];	
@@ -51,7 +51,7 @@ include("connexion_bdd.php");
 								echo $correspondance_etats[$ligne['state']]." - ". $ligne['duree'];
 							}
 							?>
-						</td>
+						</b></font></td>
 					</tr>
 					<?php
 				}
@@ -78,13 +78,9 @@ include("connexion_bdd.php");
 			});
 		}
 	</script>
-	<br>
+	<br><br><br><br>
 	<form action="menu_partie.php">
 		<button><b>Retour</b></button>
 	</form>
-	
-	<?php
-include 'footer.php';
-?>
 </body>
 </html>

@@ -30,7 +30,7 @@ footer{
 .form_connexion{
 	display: inline-block;
 	width: 50%;
-	border: solid white 3	px;
+	border: solid white 3px;
 	padding: 10px;
 	text-align: center;
 	color: white;
@@ -72,7 +72,7 @@ td._0{
 }
 
 td._1{
-	background-color: #F4EDC9;
+	background-color: #cfac7e;
 }
 
 td._2{
@@ -91,9 +91,33 @@ td._5{
 	background-color: #75BF7B;
 }
 
+.parent{
+	width: 80%;
+	position: static;
+	display: inline-block;
+	z-index: auto;
+	float: none;
+	box-sizing: content-box;
+	vertical-align: top;
+	margin: 0px;
 
+}
 
-tr:nth-child(even){
+.tableau_enigmes{
+	float: none;
+	display: inline-block;
+	top: 0px;
+}
+
+.cartoucheur{
+	width: 25%;
+	display: inline-block;
+	float: right;
+	margin-right: 50px;
+	top: 0px;
+}
+
+tbody tr:nth-child(even){
 	background-color: grey;
 }
 
@@ -102,13 +126,17 @@ tr:nth-child(even){
 	text-align: left;
 }
 
+input.double[type='radio'] {
+    transform: scale(2);
+}
+
 .erreur{
 	color: red;
 	font-weight: bold;
 }
 
 .succes{
-	color: green;
+	color: #0AFF0A;
 	font-weight: bold;
 }
 

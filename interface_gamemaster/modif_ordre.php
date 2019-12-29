@@ -33,14 +33,16 @@
 
 					$requete = $bdd->prepare('SELECT ID, nom, ordre_apparition FROM enigmes ORDER BY ordre_apparition');
 					$requete->execute();
+					$i=1;
 					while($donnees=$requete->fetch()){
 						?>
 						<tr>
 							<td><?php echo $donnees['nom']; ?></td>
 							<td><?php echo $donnees['ordre_apparition']; ?></td>
-							<td><input type="number" min="1" max= <?php echo "\"".$nb_enigmes."\""; ?> name=<?php echo "\"".$donnees['ID']."\""; ?>></td>
+							<td><input type="number" min="1" max= <?php echo "\"".$nb_enigmes."\""; ?> name=<?php echo "\"".$donnees['ID']."\""; ?> value=<?php echo $i; ?>></td>
 						</tr>
 						<?php
+						$i++;
 					}
 					?>
 

@@ -53,6 +53,9 @@
 						<form method="POST" action="record_enigme.php" enctype="multipart/form-data">
 							<input type="hidden" name="nom_enigme" value=<?php echo "\"".$_POST['nom_enigme']."\""; ?>>
 							<input type="hidden" name="type_signal" value=<?php echo "\"".$_POST['type_signal']."\""; ?>>
+							<input type="hidden" name="type_indice_1" value=<?php echo "\"".$_POST['type_indice_1']."\""; ?>>
+							<input type="hidden" name="type_indice_2" value=<?php echo "\"".$_POST['type_indice_2']."\""; ?>>
+							<input type="hidden" name="type_message_fin" value=<?php echo "\"".$_POST['type_message_fin']."\""; ?>>
 							<input type="hidden" name="num_tel" value=<?php echo "\"".$_POST['num_tel']."\""; ?>>
 							<?php
 							if($_POST['type_signal']=="auto") {
@@ -63,12 +66,12 @@
 							switch ($_POST['type_indice_1']) {
 								case 'texte':
 								?>
-								<label><u>Indice 1 :</u>&nbsp<textarea name="texte_indice_1" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 1 (900 caractères max). ATTENTION aux fautes d'orthographes qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
+								<label><u>Indice 1 :</u>&nbsp<textarea name="texte_indice_1" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 1 (900 caractères max). ATTENTION aux fautes d'orthographe qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
 								<?php
 								break;
 								case 'son':
 								?>
-								<label><u>Indice 1 :</u>&nbsp<i>Chargez la bande son (format .wav)</i>
+								<label><u>Indice 1 :</u>&nbsp<i>Chargez la bande son (format .mp3, 1Mo max)</i>
 									<input type="file" name="son_indice_1" /></label><br><br>
 									<?php
 									break;
@@ -76,12 +79,12 @@
 								switch ($_POST['type_indice_2']) {
 									case 'texte':
 									?>
-									<label><u>Indice 2 :</u>&nbsp<textarea name="texte_indice_2" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 2 (900 caractères max). ATTENTION aux fautes d'orthographes qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
+									<label><u>Indice 2 :</u>&nbsp<textarea name="texte_indice_2" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 2 (900 caractères max). ATTENTION aux fautes d'orthographe qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
 									<?php
 									break;
 									case 'son':
 									?>
-									<label><u>Indice 2 :</u>&nbsp<i>Chargez la bande son (format .wav)</i>
+									<label><u>Indice 2 :</u>&nbsp<i>Chargez la bande son (format .mp3, 1Mo max)</i>
 										<input type="file" name="son_indice_2" /></label><br><br>
 										<?php
 										break;
@@ -89,19 +92,19 @@
 									switch ($_POST['type_message_fin']) {
 										case 'texte':
 										?>
-										<label><u>Message de fin :</u>&nbsp<textarea name="texte_message_fin" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone lorsque l'énigme est cloturée (900 caractères max). ATTENTION aux fautes d'orthographes qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
+										<label><u>Message de fin :</u>&nbsp<textarea name="texte_message_fin" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone lorsque l'énigme est cloturée (900 caractères max). ATTENTION aux fautes d'orthographe qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
 										<?php
 										break;
 										case 'son':
 										?>
-										<label><u>Message de fin :</u>&nbsp<i>Chargez la bande son (format .wav)</i>
+										<label><u>Message de fin :</u>&nbsp<i>Chargez la bande son (format .mp3, 1Mo max)</i>
 											<input type="file" name="son_message_fin" /></label><br><br>
 											<?php
 											break;
 										}
 										?>
 										<br><br>
-										<button type="submit" style="position: relative; left: 40%;">Enregistrer l'énigme</button>
+										<button type="submit" style="position: relative; left: 40%;"><b>Enregistrer l'énigme</b></button>
 									</form>
 								</div>
 								<?php
@@ -110,11 +113,8 @@
 						}
 					}
 					?>
-					<?php
-					if($erreur){
-						echo "<form action=\"ajout_enigme.php\"><button type=\"submit\" >Retour</button></form>";
-					}
-					?>
+					<br>
+					<form action="ajout_enigme.php"><button type="submit">Retour</button></form>
 
 				</center>
 				<?php

@@ -26,7 +26,7 @@
 			<input type="radio" name="type_indice_1" value="texte" id="chx3">
 			<label for="chx3">Texte lu par une voix synthétique</label>
 			<input type="radio" name="type_indice_1" value="son" id="chx4"></label>
-			<label for="chx4">Bande son (format .wav)</label>
+			<label for="chx4">Bande son (format .mp3)</label>
 			<input type="radio" name="type_indice_1" value="vide" id="chx5"></label>
 			<label for="chx5">Pas d'indice 1</label>
 		<br><br>
@@ -35,7 +35,7 @@
 			<input type="radio" name="type_indice_2" value="texte" id="chx6">
 			<label for="chx6">Texte lu par une voix synthétique</label>
 			<input type="radio" name="type_indice_2" value="son" id="chx7"></label>
-			<label for="chx7">Bande son (format .wav)</label>
+			<label for="chx7">Bande son (format .mp3)</label>
 			<input type="radio" name="type_indice_2" value="vide" id="chx8"></label>
 			<label for="chx8">Pas d'indice 2</label>
 		<br><br>
@@ -44,7 +44,7 @@
 			<input type="radio" name="type_message_fin" value="texte" id="chx9">
 			<label for="chx9">Texte lu par une voix synthétique</label>
 			<input type="radio" name="type_message_fin" value="son" id="chx10"></label>
-			<label for="chx10">Bande son (format .wav)</label>
+			<label for="chx10">Bande son (format .mp3)</label>
 			<input type="radio" name="type_message_fin" value="vide" id="chx11"></label>
 			<label for="chx11">Pas de message de fin</label>
 		<br><br>

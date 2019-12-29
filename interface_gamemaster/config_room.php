@@ -18,7 +18,7 @@
 	</form>
 	<br>
 	<form action="modif_ordre.php">
-		<button>Modifier l'ordre des énigmes</button>
+		<button>Voir/modifier l'ordre des énigmes</button>
 	</form>
 	<br>
 	<form action="suppr_enigme.php">
@@ -32,7 +32,7 @@
 	</form>
 	<br>
 	<form action="ecouter_bandes.php">
-		<button>Ecouter les bandes son</button>
+		<button>Voir et écouter les bandes sons</button>
 	</form>
 	<br>
 	<form action="suppr_bande.php">
