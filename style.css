@@ -1,0 +1,181 @@
+* {-moz-box-sizing: border-box; box-sizing: border-box;}
+
+html{
+	background-color: black;
+}
+
+header{
+	display: block;
+	margin: auto;
+	color: white;
+}
+
+body{
+	color: white;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 0;
+	text-align: center;
+}
+
+footer{
+	color: white;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.form_connexion{
+	display: inline-block;
+	width: 50%;
+	border: solid white 3px;
+	padding: 10px;
+	text-align: center;
+	color: white;
+}
+
+.temoin_connexion{
+	color: #0AFF0A;
+}
+
+a{
+	color: #8A8A8A;
+}
+
+table, th, td {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+th{
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.no_border{
+	border: none;
+}
+
+td{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+td._0{
+	background-color: #A6A6A6;
+}
+
+td._1{
+	background-color: #cfac7e;
+}
+
+td._2{
+	background-color: #F5B8B3;
+}
+
+td._3{
+	background-color: #FAC453;
+}
+
+td._4{
+	background-color: #FA7B74;
+}
+
+td._5{
+	background-color: #75BF7B;
+}
+
+.parent{
+	width: 80%;
+	position: static;
+	display: inline-block;
+	z-index: auto;
+	float: none;
+	box-sizing: content-box;
+	vertical-align: top;
+	margin: 0px;
+
+}
+
+.tableau_enigmes{
+	float: none;
+	display: inline-block;
+	top: 0px;
+}
+
+.cartoucheur{
+	width: 25%;
+	display: inline-block;
+	float: right;
+	margin-right: 50px;
+	top: 0px;
+}
+
+tbody tr:nth-child(even){
+	background-color: grey;
+}
+
+.formulaire{
+	width: 50%;
+	text-align: left;
+}
+
+input.double[type='radio'] {
+    transform: scale(2);
+}
+
+.erreur{
+	color: red;
+	font-weight: bold;
+}
+
+.succes{
+	color: #0AFF0A;
+	font-weight: bold;
+}
+
+ /* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  cursor: pointer;
+  padding: 18px;
+  width: 80%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+} 
+
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: white;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.ensemble_btns{
+	border: white dashed 1px;
+	padding: 10px;
+	width: 20%;
+}
