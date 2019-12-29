@@ -19,7 +19,7 @@ include("connexion_bdd.php");
 	<h1>Historique des parties</h1>
 	<p><i>Les heures indiquées ci-dessous sont des heures UTC.</i></p>
 	<?php
-	$reqgen = $bdd->prepare('SELECT parties.ID AS ID_partie, parties.date_debut AS debdate, parties.date_fin AS enddate, game_masters.nom AS gmname, game_masters.prenom AS gmfname FROM parties INNER JOIN game_masters ON (parties.ID_gamemaster = game_masters.ID) WHERE parties.date_fin != 0');
+	$reqgen = $bdd->prepare('SELECT parties.ID AS ID_partie, parties.date_debut AS debdate, parties.date_fin AS enddate, game_masters.nom AS gmname, game_masters.prenom AS gmfname FROM parties INNER JOIN game_masters ON (parties.ID_gamemaster = game_masters.ID) WHERE parties.date_fin !=0 ORDER BY parties.ID DESC');
 	$reqgen->execute();
 	while($partie = $reqgen->fetch()){
 		?>

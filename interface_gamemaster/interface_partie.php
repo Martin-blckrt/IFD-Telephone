@@ -57,13 +57,31 @@ if(!$_SESSION['partie_en_cours']){
 			    console.log(nameInput);
 			    if (nameInput === "") {
 			        document.getElementById('send').disabled = true;
+				document.getElementById('send').style.background='#E1E1E1';
 			    } else {
 			        document.getElementById('send').disabled = false;
+ 				document.getElementById('send').style.background='#34C800';
+
 			    }
 			}
 
 			function myFunction2() {
 				document.getElementById('send2').disabled = false;
+				document.getElementById('send2').style.background='#34C800';
+
+			}
+
+			function AppuiBtnBandes(){
+				document.getElementById('send2').style.background='#FF8000';
+				document.getElementById('send2').innerHTML = "En attente de décrochage... La page rechargera une fois la bande son jouée";
+
+			}
+
+			function AppuiBtnMessage(){
+				var Btn = document.getElementById("send");
+				Btn.disabled= true;
+				Btn.style.background='#FF8000';
+				Btn.innerHTML = "En attente de décrochage... La page rechargera une fois le message lu";
 			}
 
 			
@@ -94,7 +112,7 @@ if(!$_SESSION['partie_en_cours']){
 				</tr>
 				<tr>
 					<th colspan="2">
-					<button type="submit" id="send2"><b><font size="3pt">FAIRE SONNER ET LANCER LE SON</font></b></button>
+					<button onclick="AppuiBtnBandes"  type="submit" id="send2" style="font-weight: bold; font-size: 13pt;">FAIRE SONNER ET LANCER LE SON</button>
 				</th>
 				</tr>
 			</thead>
@@ -134,13 +152,13 @@ if(!$_SESSION['partie_en_cours']){
 					</tr>
 					<tr>
 						<th colspan="2">
-						<button type="submit" id="send"><b><font size="3pt">FAIRE SONNER ET LIRE LE MESSAGE</font></b></button>
+						<button type="submit" onclick="AppuiBtnMessage()" id="send" style="font-weight: bold; font-size: 13pt;">FAIRE SONNER PUIS LIRE LE MESSAGE</font></b></button>
 					</th>
 				</thead>
 				<tbody>
 					<tr>
 						<td>
-							<input id="name" style="width: 100%; height: 100%;" name="message" placeholder="Saisissez votre message ici... (500 caractères max.)" onkeyup="myFunction()">
+							<input id="name" maxlength="200" style="width: 100%; height: 100%;" name="message" placeholder="Saisissez votre message ici... (200 caractères max.)" onkeyup="myFunction()">
 						</td>
 					</tr>
 				</tbody>
