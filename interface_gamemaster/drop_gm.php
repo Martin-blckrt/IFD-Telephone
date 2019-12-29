@@ -52,6 +52,8 @@ session_start();
 				}else{
 					$requete = $bdd->prepare('DELETE FROM game_masters WHERE identifiant = ?');
 					$requete->execute(array(htmlspecialchars($_POST['identifiant'])));
+					$req2 = $bdd->prepare('DELETE FROM parties WHERE ID_gamemaster = ?');
+					$req2->execute(array($_SESSION['connected_gm_id']));
 					echo "<p class=\"succes\">Votre compte a bien été supprimé.</p>";
 					echo "<form action=\"deconnexion.php\"><button type =\"submit\">Retour à l'accueil</button></form>";
 				}
