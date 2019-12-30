@@ -20,8 +20,8 @@ body{
 }
 
 footer{
+	display: block;
 	color: white;
-	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -137,6 +137,11 @@ input.double[type='radio'] {
 
 .succes{
 	color: #0AFF0A;
+	font-weight: bold;
+}
+
+.warning{
+	color: orange;
 	font-weight: bold;
 }
 

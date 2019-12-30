@@ -66,7 +66,7 @@
 							switch ($_POST['type_indice_1']) {
 								case 'texte':
 								?>
-								<label><u>Indice 1 :</u>&nbsp<textarea name="texte_indice_1" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 1 (900 caractères max). ATTENTION aux fautes d'orthographe qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
+								<label><u>Indice 1 :</u>&nbsp<textarea name="texte_indice_1"  maxlength="200" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 1 (200 caractères max). ATTENTION les accents sont interdits !"></textarea></label><br><br>
 								<?php
 								break;
 								case 'son':
@@ -79,7 +79,7 @@
 								switch ($_POST['type_indice_2']) {
 									case 'texte':
 									?>
-									<label><u>Indice 2 :</u>&nbsp<textarea name="texte_indice_2" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 2 (900 caractères max). ATTENTION aux fautes d'orthographe qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
+									<label><u>Indice 2 :</u>&nbsp<textarea name="texte_indice_2" maxlength="200" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone en tant qu'indice de niveau 2 (200 caractères max). ATTENTION les accents sont interdits !"></textarea></label><br><br>
 									<?php
 									break;
 									case 'son':
@@ -92,7 +92,7 @@
 									switch ($_POST['type_message_fin']) {
 										case 'texte':
 										?>
-										<label><u>Message de fin :</u>&nbsp<textarea name="texte_message_fin" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone lorsque l'énigme est cloturée (900 caractères max). ATTENTION aux fautes d'orthographe qui pourraient gêner la synthèse vocale !"></textarea></label><br><br>
+										<label><u>Message de fin :</u>&nbsp<textarea name="texte_message_fin"  maxlength="200" rows="3" cols="50" placeholder="Tapez ici le texte que vous voulez lire sur le téléphone lorsque l'énigme est cloturée (200 caractères max). ATTENTION les accents sont interdits !"></textarea></label><br><br>
 										<?php
 										break;
 										case 'son':

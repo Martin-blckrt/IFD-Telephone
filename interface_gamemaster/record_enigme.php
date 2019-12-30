@@ -13,6 +13,18 @@
 	<h1>Ajouter une énigme à l'Escape Room</h1>
 	<center>
 		<?php
+		function clean($string, $charset='utf-8')
+			{
+				$string = str_replace('"', " ", $string);
+				$string = str_replace("'", " ", $string);
+				$string = htmlentities( $string, ENT_NOQUOTES, $charset );
+    
+				$string = preg_replace( '#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $string );
+				$string = preg_replace( '#&([A-za-z]{2})(?:lig);#', '\1', $string );
+				$string = preg_replace( '#&[^;]+;#', '', $string );
+				return $string;
+			}
+			
 		$erreur = 0;
 		if(!empty($_POST)){
 			//on vérifie la présence des éventuelles données textuelles
@@ -85,6 +97,32 @@
 				echo "<p class=\"erreur\">Une erreur est survenue lors de l'importation de la bande son du message de fin. Veuillez réessayer avec un fichier plus léger. Code d'erreur : ".$_FILES['son_message_fin']['error']."</p>";
 				$erreur = 1;
 			}
+			
+			//on vérifie que les textes d'indices et de messages de fin sont de longueur <= 200 caractères
+			if(!empty($_POST['texte_indice_1']) AND strlen($_POST['type_indice_1'])>200){
+				echo "<p class=\"erreur\">Le texte saisi en tant qu'indice 1 dépasse les 200 caractères.</p>";
+				$erreur = 1;
+			}
+			if(!empty($_POST['texte_indice_2']) AND strlen($_POST['type_indice_2'])>200){
+				echo "<p class=\"erreur\">Le texte saisi en tant qu'indice 2 dépasse les 200 caractères.</p>";
+				$erreur = 1;
+			}
+			if(!empty($_POST['texte_message_fin']) AND strlen($_POST['texte_message_fin'])>200){
+				echo "<p class=\"erreur\">Le texte saisi en tant que message de fin dépasse les 200 caractères.</p>";
+				$erreur = 1;
+			}
+			
+			if(!empty($_POST['texte_indice_1']) AND $_POST['type_indice_1']!=clean($_POST['type_indice_1'])){
+				echo "<p class=\"warning\">Le texte saisi en tant qu'indice 1 contenait des accents et d'autres caractères spéciaux qui ont été supprimés automatiquement, attention cela peut changer la prononciation !</p>";
+			}
+			if(!empty($_POST['texte_indice_2']) AND $_POST['type_indice_2']!=clean($_POST['type_indice_2'])){
+				echo "<p class=\"warning\">Le texte saisi en tant qu'indice 2 contenait des accents et d'autres caractères spéciaux qui ont été supprimés automatiquement, attention cela peut changer la prononciation !</p>";
+			}
+			if(!empty($_POST['texte_message_fin']) AND $_POST['texte_message_fin']!=clean($_POST['texte_message_fin'])){
+				echo "<p class=\"warning\">Le texte saisi en tant que message de fin contenait des accents et d'autres caractères spéciaux qui ont été supprimés automatiquement, attention cela peut changer la prononciation !</p>";
+			}
+			
+			
 		}
 
 		if($erreur){
@@ -175,11 +213,11 @@
 				'newNumeroTel' => $_POST['num_tel'],
 				'newTopic' => $new_topic_MQTT,
 				'newTypeInd1' => $new_type_ind1,
-				'newTexteInd1' => $texte_ind1,
+				'newTexteInd1' => clean($texte_ind1),
 				'newTypeInd2' => $new_type_ind2,
-				'newTexteInd2' => $texte_ind2,
+				'newTexteInd2' => clean($texte_ind2),
 				'newTypeMF' => $new_type_mf,
-				'newTexteMF' => $texte_mf
+				'newTexteMF' => clean($texte_mf)
 			));
 
 			echo "<p class=\"succes\">L'énigme a été ajoutée avec succès. Par défaut, elle a été placée en dernière dans l'ordre d'apparition. Vous pouvez modifier cet ordre à partir du menu de configuration de l'Escape Room.</p>";
