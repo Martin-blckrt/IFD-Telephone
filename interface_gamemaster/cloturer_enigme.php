@@ -1,6 +1,6 @@
 <?php
 session_start();
-exec("python /home/pi/cloturer_enigme.py ".$_POST['id_enigme']);
+exec("sudo python /home/pi/cloturer_enigme.py ".$_POST['id_enigme']);
 /*
 include("connexion_bdd.php");
 		if($_POST['state_enigme']==1 OR $_POST['state_enigme'] == 2){

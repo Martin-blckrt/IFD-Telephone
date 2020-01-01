@@ -3,9 +3,10 @@ session_start();
 	//premiere chose a faire : inserer la nouvelle partie dans la table des parties et creer les details partie (initialiser tous les jeux a "En attente") si et seulement si il n'y a pas de partie en cours
 include("connexion_bdd.php");
 include("verif_partie_en_cours.php");
+exec("sudo systemctl start indices.service");
+exec("sudo systemctl start mqtt.service");
 if(!$_SESSION['partie_en_cours']){
 	include("connexion_bdd.php");
-	exec("sudo systemctl start indices.service");
 	$requete = $bdd->prepare('INSERT INTO parties(date_debut,ID_gamemaster) VALUES(UTC_TIMESTAMP(),?)');
 	$requete->execute(array($_SESSION['connected_gm_id']));
 	$requete = $bdd->prepare('SELECT MAX(ID) AS num_partie FROM parties');

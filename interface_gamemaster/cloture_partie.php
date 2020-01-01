@@ -7,5 +7,6 @@
 		$requete->execute(array($_SESSION['partie_ouverte']));
 	}
 	exec("sudo systemctl stop indices.service");
+	exec("sudo systemctl stop mqtt.service");
 	header("Location: menu_partie.php");
 ?>
