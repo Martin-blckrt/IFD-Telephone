@@ -1,6 +1,6 @@
 <?php
 session_start();
-	include("connexion_bdd.php");
+include("connexion_bdd.php");
 ?>
 <h2><b><u>État des énigmes :</u></b></h2>
 <table>
@@ -50,3 +50,26 @@ session_start();
 			?>
 		</tbody>
 </table>
+
+<br><br>
+
+<h2><b><u>Demande d'aide :</u>&nbsp
+<?php
+	$req_help = $bdd->prepare('SELECT MAX(ID) AS maxi FROM help_request');
+	$req_help->execute();
+	$rep = $req_help->fetch();
+	$ID_max = $rep['maxi'];
+	$req = $bdd->prepare('SELECT traitee FROM help_request WHERE ID = ?');
+	$req->execute(array($ID_max));
+	$donn = $req->fetch();
+	$traitee = $donn['traitee'];
+	if($traitee==0)
+	{
+		echo "<font class=\"succes\">Nouvelle demande d'aide - <a href=\"ecouter_help_request.php\" onclick=\"window.open(this.href, 'Popup', 'scrollbars=1,resizable=1,height=560,width=770'); return false;\">Ecouter l'enregistrement</a></font>";
+	}
+	else
+	{
+		echo "Aucune";
+	}
+?>
+</b></h2>

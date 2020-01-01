@@ -49,7 +49,7 @@
 			<label for="chx11">Pas de message de fin</label>
 		<br><br>
 
-		<label><u>Numéro à composer sur le téléphone (à 3 chiffres) :</u>&nbsp<input type="text" name="num_tel" placeholder="XXX" pattern="^[0-9]{3}$"></label><br><br>
+		<label><u>Numéro à composer sur le téléphone à 3 chiffres, différent de 000 (= numéro réservé pour le contact Game-Master) :</u>&nbsp<input type="text" name="num_tel" placeholder="XXX" pattern="^[0-9]{3}$"></label><br><br>
 
 		<button type="submit" style="position: relative; left: 40%;">Suivant</button>
 	</form>

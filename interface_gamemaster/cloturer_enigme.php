@@ -1,5 +1,7 @@
 <?php
 session_start();
+exec("python /home/pi/cloturer_enigme.py ".$_POST['id_enigme']);
+/*
 include("connexion_bdd.php");
 		if($_POST['state_enigme']==1 OR $_POST['state_enigme'] == 2){
 			$new_state = $_POST['state_enigme']+2;
@@ -23,6 +25,6 @@ include("connexion_bdd.php");
 			'no_pa' => $_SESSION['partie_ouverte'],
 			'dur' => $new_duree
 		));
-
+*/
 header("Location: interface_partie.php");
 ?>

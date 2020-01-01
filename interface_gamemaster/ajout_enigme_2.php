@@ -33,6 +33,9 @@
 			if(empty($_POST['num_tel'])){
 				echo "<p class=\"erreur\">Vous n'avez pas saisi le numéro à composer sur le téléphone</p>";
 			}
+			if($_POST['num_tel']<=0 OR $_POST['num_tel']>999){
+				echo "<p class=\"erreur\">Le numéro de téléphone que vous avez choisi est incorrect</p>";
+			}
 		}
 		if(!empty($_POST['nom_enigme']) AND !empty($_POST['type_signal']) AND !empty($_POST['type_indice_1']) AND !empty($_POST['type_indice_2']) AND !empty($_POST['type_message_fin']) AND !empty($_POST['num_tel'])){
 			include("connexion_bdd.php");

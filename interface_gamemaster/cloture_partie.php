@@ -6,5 +6,6 @@
 		$requete = $bdd->prepare('UPDATE parties SET date_fin = UTC_TIMESTAMP() WHERE ID = ?');
 		$requete->execute(array($_SESSION['partie_ouverte']));
 	}
+	exec("sudo systemctl stop indices.service");
 	header("Location: menu_partie.php");
 ?>

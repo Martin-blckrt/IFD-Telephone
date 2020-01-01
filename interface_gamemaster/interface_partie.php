@@ -5,6 +5,7 @@ include("connexion_bdd.php");
 include("verif_partie_en_cours.php");
 if(!$_SESSION['partie_en_cours']){
 	include("connexion_bdd.php");
+	exec("sudo systemctl start indices.service");
 	$requete = $bdd->prepare('INSERT INTO parties(date_debut,ID_gamemaster) VALUES(UTC_TIMESTAMP(),?)');
 	$requete->execute(array($_SESSION['connected_gm_id']));
 	$requete = $bdd->prepare('SELECT MAX(ID) AS num_partie FROM parties');
@@ -24,6 +25,14 @@ if(!$_SESSION['partie_en_cours']){
 			'state' => 0,
 			'duree' => 0));
 	}
+	
+	$req = $bdd->prepare('SELECT MAX(ID) AS maxi FROM help_request');
+	$req->execute();
+	$rep=$req->fetch();
+	$IDMAX = $rep['maxi'];
+	
+	$req3 = $bdd->prepare('UPDATE help_request SET traitee = 1 WHERE ID = ?');
+	$req3->execute(array($IDMAX));
 }
 
 ?>

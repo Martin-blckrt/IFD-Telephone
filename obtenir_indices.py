@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO #pour pouvoir communiquer avec les ports GPIO = General 
 import time #pour pouvoir faire des pauses
 import math #pour la fonction puissance math.pow(x,n)
 import os #pour la partie synthese vocale
+import subprocess
 
 mariadb_connection = mariadb.connect(user='root',password='KqJ=4^QDf6._~]ET^k5u',database='telephone')
 
@@ -11,6 +12,10 @@ pin_btn = 12    #le cadran est branche sur l entree 10 (numero BOARD)
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pin_btn,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+
+pin_racc = 16
+
+GPIO.setup(pin_racc,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
 
 def compose_numero():
     nb_chiffres = 3
@@ -46,7 +51,7 @@ def charge_nums():
     return nums_tel
 
 def dire(phrase):
-    os.system("./speech.sh "+str(phrase))
+    os.system("./home/pi/speech.sh "+str(phrase))
 
 def charge_indices():
     cursor = mariadb_connection.cursor()
@@ -96,31 +101,79 @@ def donner_indice(liste_indices, ID_enigme, type_indice):
             setstate(ID_enigme,type_indice)
 #print "Partie en cours : ",getcurrentgameid()
 
+intro_dite=0
 
 while(1):
     nouv_num = compose_numero()
-    liste_nums = charge_nums()
-    liste_indices = charge_indices()
-    num_trouve = 0
-    for i in liste_nums:
-        if(i[1]== nouv_num):
-            num_trouve = 1
-            ID_enigme = i[0]
-            #print "Numero attribue a l enigme "+str(i[0])
-            etat = getstate(ID_enigme)
-            if (etat<=1):
-                if(indice_existe(liste_indices, ID_enigme, etat+1)):
-                   dire("Voici lindice :")
-                   donner_indice(liste_indices, ID_enigme, etat+1)
+    if(nouv_num==0):    #demande d aide de la part des joueurs
+        '''
+        duree = 15
+        dire("Vous avez demander une aide exterieure, decrivez votre probleme en parlant dans le telephone pendant "+str(duree)+" secondes apres le bip sonore.")
+        time.sleep(1)
+        os.system("aplay /home/pi/bip_sonore.wav")
+        os.system("arecord -D hw:1,0 -d "+str(duree)+" -f cd /home/pi/help_request.wav -c 1")
+        time.sleep(duree+1)
+        os.system("aplay /home/pi/bip_sonore.wav")
+        dire("Votre message vient detre transmis, nous allons vous repondre")
+        os.system("sox /home/pi/help_request.wav /home/pi/help_requestAMP.wav vol 31 dB")
+        os.system("lame --decode /home/pi/help_requestAMP.wav /var/www/html/help.mp3")
+        time.sleep(2)
+        #os.system("omxplayer /home/pi/help.mp3")
+        cursor = mariadb_connection.cursor()
+        cursor.execute("INSERT INTO help_request(traitee) VALUES (0)")
+        mariadb_connection.commit()
+        '''
+        proc_args=['arecord', '-D', 'hw:1,0','-d','60','-f','cd','-c','1','/home/pi/help_request.wav']
+        while(GPIO.input(pin_racc) == GPIO.HIGH):
+            dire("Veuillez decrocher le haut parleur.")
+            time.sleep(1)
+        if(intro_dite==0):
+            dire("Vous avez demander une aide exterieure, decrivez votre probleme en parlant dans le telephone apres le bip sonore et terminez en raccrochant le haut parleur.")
+            intro_dite=1
+        os.system("aplay /home/pi/bip_sonore.wav")
+        a=subprocess.Popen(proc_args,shell=False)
+        while(GPIO.input(pin_racc) == GPIO.HIGH):
+            time.sleep(0.5)
+        while(GPIO.input(pin_racc) == GPIO.LOW):
+            time.sleep(0.5)
+        a.terminate()
+        time.sleep(1)
+        os.system("aplay /home/pi/bip_sonore.wav")
+        dire("Votre message vient detre transmis, nous allons vous repondre")
+        time.sleep(1)
+        os.system("sox /home/pi/help_request.wav /home/pi/help_requestAMP.wav vol 31 dB")
+        time.sleep(1)
+        #os.system("rm /var/www/html/help.mp3")
+        os.system("lame --decode /home/pi/help_requestAMP.wav /var/www/html/help.mp3")
+        #os.system("omxplayer /home/pi/help.mp3")
+        cursor = mariadb_connection.cursor()
+        cursor.execute("INSERT INTO help_request(traitee) VALUES (0)")
+        mariadb_connection.commit()
+        
+    else:
+        liste_nums = charge_nums()
+        print liste_nums
+        liste_indices = charge_indices()
+        num_trouve = 0
+        for i in liste_nums:
+            if(i[1]== nouv_num):
+                num_trouve = 1
+                ID_enigme = i[0]
+                #print "Numero attribue a l enigme "+str(i[0])
+                etat = getstate(ID_enigme)
+                if (etat<=1):
+                    if(indice_existe(liste_indices, ID_enigme, etat+1)):
+                       dire("Voici lindice :")
+                       donner_indice(liste_indices, ID_enigme, etat+1)
+                    else:
+                       dire("Il nexiste pas, ou plus dindice pour cette enigme")
+                       
                 else:
-                   dire("Il nexiste pas, ou plus dindice pour cette enigme")
-                   
-            else:
-                dire("Desoler, vous avez deja eu tous les indices possibles pour cette enigme")
-    
+                    dire("Desoler, vous avez deja eu tous les indices possibles pour cette enigme")
+        
+                    
                 
-            
-    if (num_trouve==0):
-        #print "Numero non attribue"
-        dire("Le numero que vous avez saisi ne correspond a aucune enigme, veuillez recommencer")
-   
+        if (num_trouve==0):
+            #print "Numero non attribue"
+            dire("Le numero que vous avez composer ne correspond a aucune enigme, veuillez recommencer")
+       
